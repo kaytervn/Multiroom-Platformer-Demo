@@ -20,7 +20,7 @@ const key = {
 let parsedCollisons;
 let collisionBlocks;
 let background;
-let doors;
+let door;
 
 let level = 1;
 let levels = {
@@ -43,24 +43,22 @@ let levels = {
         },
         imageSrc: { default: ["img/backgroundLevel1.png"] },
       });
-      doors = [
-        new Sprite({
-          position: {
-            x: 767,
-            y: 273,
-          },
-          imageSrc: {
-            default: createImageSrc({
-              path: "img/doorOpen",
-              fileName: "doorOpen",
-              count: 5,
-            }),
-          },
-          loop: false,
-          scale: 2,
-          autoPlay: false,
-        }),
-      ];
+      door = new Sprite({
+        position: {
+          x: 767,
+          y: 273,
+        },
+        imageSrc: {
+          default: createImageSrc({
+            path: "img/doorOpen",
+            fileName: "doorOpen",
+            count: 5,
+          }),
+        },
+        loop: false,
+        scale: 2,
+        autoPlay: false,
+      });
     },
   },
   2: {
@@ -82,24 +80,22 @@ let levels = {
         },
         imageSrc: { default: ["img/backgroundLevel2.png"] },
       });
-      doors = [
-        new Sprite({
-          position: {
-            x: 773,
-            y: 336,
-          },
-          imageSrc: {
-            default: createImageSrc({
-              path: "img/doorOpen",
-              fileName: "doorOpen",
-              count: 5,
-            }),
-          },
-          loop: false,
-          scale: 2,
-          autoPlay: false,
-        }),
-      ];
+      door = new Sprite({
+        position: {
+          x: 773,
+          y: 336,
+        },
+        imageSrc: {
+          default: createImageSrc({
+            path: "img/doorOpen",
+            fileName: "doorOpen",
+            count: 5,
+          }),
+        },
+        loop: false,
+        scale: 2,
+        autoPlay: false,
+      });
     },
   },
   3: {
@@ -121,24 +117,22 @@ let levels = {
         },
         imageSrc: { default: ["img/backgroundLevel3.png"] },
       });
-      doors = [
-        new Sprite({
-          position: {
-            x: 176,
-            y: 335,
-          },
-          imageSrc: {
-            default: createImageSrc({
-              path: "img/doorOpen",
-              fileName: "doorOpen",
-              count: 5,
-            }),
-          },
-          loop: false,
-          scale: 2,
-          autoPlay: false,
-        }),
-      ];
+      door = new Sprite({
+        position: {
+          x: 176,
+          y: 335,
+        },
+        imageSrc: {
+          default: createImageSrc({
+            path: "img/doorOpen",
+            fileName: "doorOpen",
+            count: 5,
+          }),
+        },
+        loop: false,
+        scale: 2,
+        autoPlay: false,
+      });
     },
   },
 };
@@ -232,9 +226,7 @@ function animate() {
   window.requestAnimationFrame(animate);
 
   background.update();
-  doors.forEach((door) => {
-    door.update();
-  });
+  door.update();
 
   // collisionBlocks.forEach((collisionBlock) => {
   //   collisionBlock.draw();
