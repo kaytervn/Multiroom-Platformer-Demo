@@ -69,11 +69,11 @@ class Player extends Sprite {
     if (key.d.pressed) {
       this.switchSprite("run");
       this.flipped = false;
-      this.velocity.x += 5;
+      this.velocity.x += 3;
     } else if (key.a.pressed) {
       this.switchSprite("run");
       this.flipped = true;
-      this.velocity.x -= 5;
+      this.velocity.x -= 3;
     } else {
       this.switchSprite("idle");
     }

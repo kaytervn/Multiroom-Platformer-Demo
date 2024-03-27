@@ -19,7 +19,7 @@ window.addEventListener("keydown", (event) => {
         }
       }
       if (player.velocity.y == 0) {
-        player.velocity.y -= 22;
+        player.velocity.y -= 15;
       }
       break;
     case "a":
