@@ -12,7 +12,7 @@ class Sprite {
     this.framesCurrent = 0;
     this.scale = scale;
     this.framesElapsed = 0;
-    this.framesHold = 10;
+    this.framesHold = 5;
     this.image = new Image();
     this.offset = offset;
     this.flipped = false;
