@@ -26,13 +26,18 @@ class Player extends Sprite {
     this.currentSprite;
   }
 
-  drawHitbox() {
-    c.fillStyle = "rgba(0, 0, 0, 0.5)";
-    c.fillRect(this.position.x, this.position.y, this.width, this.height);
+  drawHitbox(layerCanvas) {
+    layerCanvas.fillStyle = "rgba(0, 0, 0, 0.5)";
+    layerCanvas.fillRect(
+      this.position.x,
+      this.position.y,
+      this.width,
+      this.height
+    );
   }
 
-  update() {
-    this.draw();
+  update(layerCanvas) {
+    this.draw(layerCanvas);
     this.animateFrames();
 
     this.position.x += this.velocity.x;
