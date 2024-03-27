@@ -23,6 +23,7 @@ class Player extends Sprite {
     this.gravity = 1;
     this.collisionBlocks = collisionBlocks;
     this.sprites = sprites;
+    this.currentSprite;
   }
 
   drawHitbox() {
@@ -79,11 +80,13 @@ class Player extends Sprite {
   }
 
   switchSprite(name) {
+    if (this.currentSprite == this.sprites[name]) return;
     this.imageSrc = this.sprites[name];
     this.loop = this.sprites[name].loop;
     if (this.framesCurrent >= this.imageSrc.default.length - 1) {
       this.framesCurrent = 0;
     }
+    this.currentSprite = this.sprites[name];
   }
 
   applyGravity() {

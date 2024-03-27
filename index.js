@@ -4,8 +4,9 @@ const c = canvas.getContext("2d");
 canvas.width = 1024;
 canvas.height = 576;
 
-const parsedCollisons = collisionLevel1.parse2d();
-const collisionBlocks = parsedCollisons.createObjectsFrom2d();
+const overlay = {
+  opacity: 0,
+};
 
 const key = {
   a: {
@@ -16,8 +17,133 @@ const key = {
   },
 };
 
+let parsedCollisons;
+let collisionBlocks;
+let background;
+let doors;
+
+let level = 1;
+let levels = {
+  1: {
+    init: () => {
+      parsedCollisons = collisionLevel1.parse2d();
+      collisionBlocks = parsedCollisons.createObjectsFrom2d();
+      player.collisionBlocks = collisionBlocks;
+      player.position = {
+        x: 200,
+        y: 200,
+      };
+      if (player.currentSprite) {
+        player.currentSprite.isActive = false;
+      }
+      background = new Sprite({
+        position: {
+          x: 0,
+          y: 0,
+        },
+        imageSrc: { default: ["img/backgroundLevel1.png"] },
+      });
+      doors = [
+        new Sprite({
+          position: {
+            x: 767,
+            y: 273,
+          },
+          imageSrc: {
+            default: createImageSrc({
+              path: "img/doorOpen",
+              fileName: "doorOpen",
+              count: 5,
+            }),
+          },
+          loop: false,
+          scale: 2,
+          autoPlay: false,
+        }),
+      ];
+    },
+  },
+  2: {
+    init: () => {
+      parsedCollisons = collisionLevel2.parse2d();
+      collisionBlocks = parsedCollisons.createObjectsFrom2d();
+      player.collisionBlocks = collisionBlocks;
+      player.position = {
+        x: 100,
+        y: 70,
+      };
+      if (player.currentSprite) {
+        player.currentSprite.isActive = false;
+      }
+      background = new Sprite({
+        position: {
+          x: 0,
+          y: 0,
+        },
+        imageSrc: { default: ["img/backgroundLevel2.png"] },
+      });
+      doors = [
+        new Sprite({
+          position: {
+            x: 773,
+            y: 336,
+          },
+          imageSrc: {
+            default: createImageSrc({
+              path: "img/doorOpen",
+              fileName: "doorOpen",
+              count: 5,
+            }),
+          },
+          loop: false,
+          scale: 2,
+          autoPlay: false,
+        }),
+      ];
+    },
+  },
+  3: {
+    init: () => {
+      parsedCollisons = collisionLevel3.parse2d();
+      collisionBlocks = parsedCollisons.createObjectsFrom2d();
+      player.collisionBlocks = collisionBlocks;
+      if (player.currentSprite) {
+        player.currentSprite.isActive = false;
+      }
+      player.position = {
+        x: 800,
+        y: 150,
+      };
+      background = new Sprite({
+        position: {
+          x: 0,
+          y: 0,
+        },
+        imageSrc: { default: ["img/backgroundLevel3.png"] },
+      });
+      doors = [
+        new Sprite({
+          position: {
+            x: 176,
+            y: 335,
+          },
+          imageSrc: {
+            default: createImageSrc({
+              path: "img/doorOpen",
+              fileName: "doorOpen",
+              count: 5,
+            }),
+          },
+          loop: false,
+          scale: 2,
+          autoPlay: false,
+        }),
+      ];
+    },
+  },
+};
+
 const player = new Player({
-  collisionBlocks,
   position: {
     x: 200,
     y: 200,
@@ -42,7 +168,6 @@ const player = new Player({
   },
   width: 40,
   height: 58,
-  preventInput: false,
   sprites: {
     idle: {
       default: createImageSrc({
@@ -69,6 +194,23 @@ const player = new Player({
         count: 8,
       }),
       loop: false,
+      onComplete: () => {
+        gsap.to(overlay, {
+          opacity: 1,
+          onComplete: () => {
+            level++;
+            if (level == 4) {
+              level = 1;
+            }
+            levels[level].init();
+            player.switchSprite("idle");
+            player.preventInput = false;
+            gsap.to(overlay, {
+              opacity: 0,
+            });
+          },
+        });
+      },
     },
     run: {
       default: createImageSrc({
@@ -86,42 +228,28 @@ const player = new Player({
   },
 });
 
-const background = new Sprite({
-  position: {
-    x: 0,
-    y: 0,
-  },
-  imageSrc: { default: ["img/backgroundLevel1.png"] },
-});
-
-const doors = [
-  new Sprite({
-    position: {
-      x: 767,
-      y: 273,
-    },
-    imageSrc: {
-      default: createImageSrc({
-        path: "img/doorOpen",
-        fileName: "doorOpen",
-        count: 5,
-      }),
-    },
-    loop: false,
-    scale: 2,
-    autoPlay: false,
-  }),
-];
-
 function animate() {
   window.requestAnimationFrame(animate);
+
   background.update();
   doors.forEach((door) => {
     door.update();
   });
+
+  // collisionBlocks.forEach((collisionBlock) => {
+  //   collisionBlock.draw();
+  // });
   // player.drawHitbox();
+
   player.update();
   player.handleInput(key);
+
+  c.save();
+  c.globalAlpha = overlay.opacity;
+  c.fillStyle = "black";
+  c.fillRect(0, 0, canvas.width, canvas.height);
+  c.restore();
 }
 
+levels[level].init();
 animate();

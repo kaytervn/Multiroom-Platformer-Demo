@@ -60,6 +60,15 @@ class Sprite {
         this.framesCurrent = 0;
       }
     }
+    if (this.currentSprite?.onComplete) {
+      if (
+        this.framesCurrent == this.imageSrc.default.length - 1 &&
+        !this.currentSprite.isActive
+      ) {
+        this.currentSprite.onComplete();
+        this.currentSprite.isActive = true;
+      }
+    }
   }
 
   update() {
