@@ -59,6 +59,7 @@ class Sprite {
       } else if (this.loop) {
         this.framesCurrent = 0;
       }
+      this.framesElapsed = 0;
     }
     if (this.currentSprite?.onComplete) {
       if (
