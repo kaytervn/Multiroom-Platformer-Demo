@@ -1,17 +1,8 @@
-const backgroundLayer = document.querySelector("#backgroundLayer");
-backgroundLayer.width = 1024;
-backgroundLayer.height = 576;
-const backgroundCanvas = backgroundLayer.getContext("2d");
+const canvas = document.querySelector("canvas");
+const c = canvas.getContext("2d");
 
-const objectsLayer = document.querySelector("#objectsLayer");
-objectsLayer.width = 1024;
-objectsLayer.height = 576;
-const objectsCanvas = objectsLayer.getContext("2d");
-
-const overlayLayer = document.querySelector("#overlayLayer");
-overlayLayer.width = 1024;
-overlayLayer.height = 576;
-const overlayCanvas = overlayLayer.getContext("2d");
+canvas.width = 1024;
+canvas.height = 576;
 
 const overlay = {
   opacity: 0,
@@ -240,33 +231,24 @@ const player = new Player({
 function animate() {
   window.requestAnimationFrame(animate);
 
-  objectsCanvas.clearRect(0, 0, objectsLayer.width, objectsLayer.height);
-  overlayCanvas.clearRect(0, 0, overlayLayer.width, overlayLayer.height);
-  backgroundCanvas.clearRect(
-    0,
-    0,
-    backgroundLayer.width,
-    backgroundLayer.height
-  );
-
-  background.update(backgroundCanvas);
+  background.update();
   doors.forEach((door) => {
-    door.update(objectsCanvas);
+    door.update();
   });
 
   // collisionBlocks.forEach((collisionBlock) => {
-  //   collisionBlock.draw(objectsCanvas);
+  //   collisionBlock.draw();
   // });
-  // player.drawHitbox(objectsCanvas);
+  // player.drawHitbox();
 
-  player.update(objectsCanvas);
+  player.update();
   player.handleInput(key);
 
-  overlayCanvas.save();
-  overlayCanvas.globalAlpha = overlay.opacity;
-  overlayCanvas.fillStyle = "black";
-  overlayCanvas.fillRect(0, 0, overlayLayer.width, overlayLayer.height);
-  overlayCanvas.restore();
+  c.save();
+  c.globalAlpha = overlay.opacity;
+  c.fillStyle = "black";
+  c.fillRect(0, 0, canvas.width, canvas.height);
+  c.restore();
 }
 
 levels[level].init();

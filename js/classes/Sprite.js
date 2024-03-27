@@ -20,9 +20,9 @@ class Sprite {
     this.autoPlay = autoPlay;
   }
 
-  drawFlipped(layerCanvas) {
+  drawFlipped() {
     this.image.src = this.imageSrc.flipped[this.framesCurrent];
-    layerCanvas.drawImage(
+    c.drawImage(
       this.image,
       this.position.x + this.offset.flippedX,
       this.position.y + this.offset.y,
@@ -31,12 +31,12 @@ class Sprite {
     );
   }
 
-  draw(layerCanvas) {
+  draw() {
     if (this.flipped) {
-      this.drawFlipped(layerCanvas);
+      this.drawFlipped();
     } else {
       this.image.src = this.imageSrc.default[this.framesCurrent];
-      layerCanvas.drawImage(
+      c.drawImage(
         this.image,
         this.position.x + this.offset.x,
         this.position.y + this.offset.y,
@@ -72,8 +72,8 @@ class Sprite {
     }
   }
 
-  update(layerCanvas) {
-    this.draw(layerCanvas);
+  update() {
+    this.draw();
     this.animateFrames();
   }
 }
