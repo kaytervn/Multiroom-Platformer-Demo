@@ -41,7 +41,13 @@ let levels = {
           x: 0,
           y: 0,
         },
-        imageSrc: { default: ["img/backgroundLevel1.png"] },
+        imageSrc: {
+          default: createImageSrc({
+            path: "img",
+            fileName: "backgroundLevel1",
+            count: 1,
+          }),
+        },
       });
       door = new Sprite({
         position: {
@@ -78,7 +84,13 @@ let levels = {
           x: 0,
           y: 0,
         },
-        imageSrc: { default: ["img/backgroundLevel2.png"] },
+        imageSrc: {
+          default: createImageSrc({
+            path: "img",
+            fileName: "backgroundLevel2",
+            count: 1,
+          }),
+        },
       });
       door = new Sprite({
         position: {
@@ -115,7 +127,13 @@ let levels = {
           x: 0,
           y: 0,
         },
-        imageSrc: { default: ["img/backgroundLevel3.png"] },
+        imageSrc: {
+          default: createImageSrc({
+            path: "img",
+            fileName: "backgroundLevel3",
+            count: 1,
+          }),
+        },
       });
       door = new Sprite({
         position: {

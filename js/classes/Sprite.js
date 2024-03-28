@@ -12,7 +12,7 @@ class Sprite {
     this.framesCurrent = 0;
     this.scale = scale;
     this.framesElapsed = 0;
-    this.framesHold = 7;
+    this.framesHold = 5;
     this.image = new Image();
     this.offset = offset;
     this.flipped = false;
@@ -21,7 +21,7 @@ class Sprite {
   }
 
   drawFlipped() {
-    this.image.src = this.imageSrc.flipped[this.framesCurrent];
+    this.image = this.imageSrc.flipped[this.framesCurrent];
     c.drawImage(
       this.image,
       this.position.x + this.offset.flippedX,
@@ -35,7 +35,7 @@ class Sprite {
     if (this.flipped) {
       this.drawFlipped();
     } else {
-      this.image.src = this.imageSrc.default[this.framesCurrent];
+      this.image = this.imageSrc.default[this.framesCurrent];
       c.drawImage(
         this.image,
         this.position.x + this.offset.x,

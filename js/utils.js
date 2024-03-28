@@ -28,7 +28,9 @@ Array.prototype.createObjectsFrom2d = function () {
 function createImageSrc({ path, fileName, count }) {
   const imageSrcs = [];
   for (let i = 1; i <= count; i++) {
-    imageSrcs.push(path + "/" + fileName + "(" + i + ").png");
+    const image = new Image();
+    image.src = path + "/" + fileName + "(" + i + ").png";
+    imageSrcs.push(image);
   }
   return imageSrcs;
 }
