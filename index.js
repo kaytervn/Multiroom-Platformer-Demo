@@ -17,6 +17,99 @@ const key = {
   },
 };
 
+const backgrounds = [
+  (level1 = new Sprite({
+    position: {
+      x: 767,
+      y: 273,
+    },
+    imageSrc: {
+      default: createImageSrc({
+        path: "img/doorOpen",
+        fileName: "doorOpen",
+        count: 5,
+      }),
+    },
+  })),
+  (level2 = new Sprite({
+    position: {
+      x: 0,
+      y: 0,
+    },
+    imageSrc: {
+      default: createImageSrc({
+        path: "img",
+        fileName: "backgroundLevel2",
+        count: 1,
+      }),
+    },
+  })),
+  (level3 = new Sprite({
+    position: {
+      x: 0,
+      y: 0,
+    },
+    imageSrc: {
+      default: createImageSrc({
+        path: "img",
+        fileName: "backgroundLevel3",
+        count: 1,
+      }),
+    },
+  })),
+];
+
+const doors = [
+  (level1 = new Sprite({
+    position: {
+      x: 767,
+      y: 273,
+    },
+    imageSrc: {
+      default: createImageSrc({
+        path: "img/doorOpen",
+        fileName: "doorOpen",
+        count: 5,
+      }),
+    },
+    loop: false,
+    scale: 2,
+    autoPlay: false,
+  })),
+  (level2 = new Sprite({
+    position: {
+      x: 773,
+      y: 336,
+    },
+    imageSrc: {
+      default: createImageSrc({
+        path: "img/doorOpen",
+        fileName: "doorOpen",
+        count: 5,
+      }),
+    },
+    loop: false,
+    scale: 2,
+    autoPlay: false,
+  })),
+  (level3 = new Sprite({
+    position: {
+      x: 176,
+      y: 335,
+    },
+    imageSrc: {
+      default: createImageSrc({
+        path: "img/doorOpen",
+        fileName: "doorOpen",
+        count: 5,
+      }),
+    },
+    loop: false,
+    scale: 2,
+    autoPlay: false,
+  })),
+];
+
 let parsedCollisons;
 let collisionBlocks;
 let background;
@@ -36,35 +129,8 @@ let levels = {
       if (player.currentSprite) {
         player.currentSprite.isActive = false;
       }
-      background = new Sprite({
-        position: {
-          x: 0,
-          y: 0,
-        },
-        imageSrc: {
-          default: createImageSrc({
-            path: "img",
-            fileName: "backgroundLevel1",
-            count: 1,
-          }),
-        },
-      });
-      door = new Sprite({
-        position: {
-          x: 767,
-          y: 273,
-        },
-        imageSrc: {
-          default: createImageSrc({
-            path: "img/doorOpen",
-            fileName: "doorOpen",
-            count: 5,
-          }),
-        },
-        loop: false,
-        scale: 2,
-        autoPlay: false,
-      });
+      background = backgrounds[level1];
+      door = doors[level1];
     },
   },
   2: {
@@ -79,35 +145,8 @@ let levels = {
       if (player.currentSprite) {
         player.currentSprite.isActive = false;
       }
-      background = new Sprite({
-        position: {
-          x: 0,
-          y: 0,
-        },
-        imageSrc: {
-          default: createImageSrc({
-            path: "img",
-            fileName: "backgroundLevel2",
-            count: 1,
-          }),
-        },
-      });
-      door = new Sprite({
-        position: {
-          x: 773,
-          y: 336,
-        },
-        imageSrc: {
-          default: createImageSrc({
-            path: "img/doorOpen",
-            fileName: "doorOpen",
-            count: 5,
-          }),
-        },
-        loop: false,
-        scale: 2,
-        autoPlay: false,
-      });
+      background = backgrounds[level2];
+      door = doors[level2];
     },
   },
   3: {
@@ -122,35 +161,8 @@ let levels = {
         x: 800,
         y: 150,
       };
-      background = new Sprite({
-        position: {
-          x: 0,
-          y: 0,
-        },
-        imageSrc: {
-          default: createImageSrc({
-            path: "img",
-            fileName: "backgroundLevel3",
-            count: 1,
-          }),
-        },
-      });
-      door = new Sprite({
-        position: {
-          x: 176,
-          y: 335,
-        },
-        imageSrc: {
-          default: createImageSrc({
-            path: "img/doorOpen",
-            fileName: "doorOpen",
-            count: 5,
-          }),
-        },
-        loop: false,
-        scale: 2,
-        autoPlay: false,
-      });
+      background = backgrounds[level3];
+      door = doors[level3];
     },
   },
 };
