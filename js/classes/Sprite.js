@@ -50,6 +50,11 @@ class Sprite {
     this.autoPlay = true;
   }
 
+  reset() {
+    this.autoPlay = false;
+    this.framesCurrent = 0;
+  }
+
   animateFrames() {
     if (!this.autoPlay) return;
     this.framesElapsed++;

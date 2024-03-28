@@ -17,106 +17,13 @@ const key = {
   },
 };
 
-const backgrounds = [
-  (level1 = new Sprite({
-    position: {
-      x: 767,
-      y: 273,
-    },
-    imageSrc: {
-      default: createImageSrc({
-        path: "img/doorOpen",
-        fileName: "doorOpen",
-        count: 5,
-      }),
-    },
-  })),
-  (level2 = new Sprite({
-    position: {
-      x: 0,
-      y: 0,
-    },
-    imageSrc: {
-      default: createImageSrc({
-        path: "img",
-        fileName: "backgroundLevel2",
-        count: 1,
-      }),
-    },
-  })),
-  (level3 = new Sprite({
-    position: {
-      x: 0,
-      y: 0,
-    },
-    imageSrc: {
-      default: createImageSrc({
-        path: "img",
-        fileName: "backgroundLevel3",
-        count: 1,
-      }),
-    },
-  })),
-];
-
-const doors = [
-  (level1 = new Sprite({
-    position: {
-      x: 767,
-      y: 273,
-    },
-    imageSrc: {
-      default: createImageSrc({
-        path: "img/doorOpen",
-        fileName: "doorOpen",
-        count: 5,
-      }),
-    },
-    loop: false,
-    scale: 2,
-    autoPlay: false,
-  })),
-  (level2 = new Sprite({
-    position: {
-      x: 773,
-      y: 336,
-    },
-    imageSrc: {
-      default: createImageSrc({
-        path: "img/doorOpen",
-        fileName: "doorOpen",
-        count: 5,
-      }),
-    },
-    loop: false,
-    scale: 2,
-    autoPlay: false,
-  })),
-  (level3 = new Sprite({
-    position: {
-      x: 176,
-      y: 335,
-    },
-    imageSrc: {
-      default: createImageSrc({
-        path: "img/doorOpen",
-        fileName: "doorOpen",
-        count: 5,
-      }),
-    },
-    loop: false,
-    scale: 2,
-    autoPlay: false,
-  })),
-];
-
 let parsedCollisons;
 let collisionBlocks;
 let background;
 let door;
 
 let level = 1;
-let levels = {
+const levels = {
   1: {
     init: () => {
       parsedCollisons = collisionLevel1.parse2d();
@@ -129,8 +36,8 @@ let levels = {
       if (player.currentSprite) {
         player.currentSprite.isActive = false;
       }
-      background = backgrounds[level1];
-      door = doors[level1];
+      background = backgrounds[level];
+      door = doors[level];
     },
   },
   2: {
@@ -145,8 +52,8 @@ let levels = {
       if (player.currentSprite) {
         player.currentSprite.isActive = false;
       }
-      background = backgrounds[level2];
-      door = doors[level2];
+      background = backgrounds[level];
+      door = doors[level];
     },
   },
   3: {
@@ -161,96 +68,11 @@ let levels = {
         x: 800,
         y: 150,
       };
-      background = backgrounds[level3];
-      door = doors[level3];
+      background = backgrounds[level];
+      door = doors[level];
     },
   },
 };
-
-const player = new Player({
-  position: {
-    x: 200,
-    y: 200,
-  },
-  imageSrc: {
-    default: createImageSrc({
-      path: "img/king/idle",
-      fileName: "idle",
-      count: 11,
-    }),
-    flipped: createImageSrc({
-      path: "img/king/idle/left",
-      fileName: "idle",
-      count: 11,
-    }),
-  },
-  scale: 2,
-  offset: {
-    x: -42,
-    y: -29,
-    flippedX: -75,
-  },
-  width: 40,
-  height: 58,
-  sprites: {
-    idle: {
-      default: createImageSrc({
-        path: "img/king/idle",
-        fileName: "idle",
-        count: 11,
-      }),
-      flipped: createImageSrc({
-        path: "img/king/idle/left",
-        fileName: "idle",
-        count: 11,
-      }),
-      loop: true,
-    },
-    doorIn: {
-      default: createImageSrc({
-        path: "img/king/doorIn",
-        fileName: "doorIn",
-        count: 8,
-      }),
-      flipped: createImageSrc({
-        path: "img/king/doorIn/left",
-        fileName: "doorIn",
-        count: 8,
-      }),
-      loop: false,
-      onComplete: () => {
-        gsap.to(overlay, {
-          opacity: 1,
-          onComplete: () => {
-            level++;
-            if (level == 4) {
-              level = 1;
-            }
-            levels[level].init();
-            player.switchSprite("idle");
-            player.preventInput = false;
-            gsap.to(overlay, {
-              opacity: 0,
-            });
-          },
-        });
-      },
-    },
-    run: {
-      default: createImageSrc({
-        path: "img/king/run",
-        fileName: "run",
-        count: 8,
-      }),
-      flipped: createImageSrc({
-        path: "img/king/run/left",
-        fileName: "run",
-        count: 8,
-      }),
-      loop: true,
-    },
-  },
-});
 
 function animate() {
   window.requestAnimationFrame(animate);
