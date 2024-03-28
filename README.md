@@ -1,5 +1,5 @@
 <h2>Multiroom Platformer Demo Game</h2>
 
-**Live Demo:** https://kaytervn.github.io/Multiroom-Platformer-Demo/
+**Live Demo:** https://ktr-kings-and-pigs.netlify.app/
 
 **Player Control:** A D W
