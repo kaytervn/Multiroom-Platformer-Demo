@@ -17,9 +17,6 @@ class Player extends Sprite {
     };
     this.width = width;
     this.height = height;
-    this.sides = {
-      bottom: this.position.y + this.height,
-    };
     this.gravity = 1;
     this.collisionBlocks = collisionBlocks;
     this.sprites = sprites;
@@ -92,7 +89,6 @@ class Player extends Sprite {
   applyGravity() {
     this.velocity.y += this.gravity;
     this.position.y += this.velocity.y;
-    this.sides.bottom = this.position.y + this.height;
   }
 
   checkForVerticalCollision() {
